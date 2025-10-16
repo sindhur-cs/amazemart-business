@@ -63,6 +63,30 @@ if (process.env.NEXT_PUBLIC_CONTENTSTACK_PREVIEW === 'true' && typeof window !==
 }
 
 export async function getPageData() {
+  // Use proxy in development to avoid CORS issues
+  if (process.env.NODE_ENV === 'development') {
+    try {
+      const response = await fetch('/api/contentstack/content_types/page/entries?environment=' + encodeURIComponent(process.env.NEXT_PUBLIC_CONTENTSTACK_ENVIRONMENT || 'dev'));
+      const result = await response.json();
+      
+      if (result.entries && result.entries.length > 0) {
+        const page = result.entries[0];
+        
+        if (process.env.NEXT_PUBLIC_CONTENTSTACK_PREVIEW === 'true') {
+          contentstack.Utils.addEditableTags(page as any, 'page', true);
+        }
+        
+        return page;
+      }
+      
+      return null;
+    } catch (error) {
+      console.error('Error fetching page data via proxy:', error);
+      return null;
+    }
+  }
+
+  // Fallback to direct SDK call in production
   const result = await blogStack
     .contentType("page")
     .entry()
@@ -83,6 +107,30 @@ export async function getPageData() {
 }
 
 export async function getBlogHeader() {
+  // Use proxy in development to avoid CORS issues
+  if (process.env.NODE_ENV === 'development') {
+    try {
+      const response = await fetch('/api/contentstack/content_types/header/entries?environment=' + encodeURIComponent(process.env.NEXT_PUBLIC_CONTENTSTACK_ENVIRONMENT || 'dev'));
+      const result = await response.json();
+      
+      if (result.entries && result.entries.length > 0) {
+        const header = result.entries[0];
+        
+        if (process.env.NEXT_PUBLIC_CONTENTSTACK_PREVIEW === 'true') {
+          contentstack.Utils.addEditableTags(header as any, 'header', true);
+        }
+        
+        return header;
+      }
+      
+      return null;
+    } catch (error) {
+      console.error('Error fetching header data via proxy:', error);
+      return null;
+    }
+  }
+
+  // Fallback to direct SDK call in production
   const result = await blogStack
     .contentType("header")
     .entry()
@@ -103,6 +151,30 @@ export async function getBlogHeader() {
 }
 
 export async function getBlogFooter() {
+  // Use proxy in development to avoid CORS issues
+  if (process.env.NODE_ENV === 'development') {
+    try {
+      const response = await fetch('/api/contentstack/content_types/footer/entries?environment=' + encodeURIComponent(process.env.NEXT_PUBLIC_CONTENTSTACK_ENVIRONMENT || 'dev'));
+      const result = await response.json();
+      
+      if (result.entries && result.entries.length > 0) {
+        const footer = result.entries[0];
+        
+        if (process.env.NEXT_PUBLIC_CONTENTSTACK_PREVIEW === 'true') {
+          contentstack.Utils.addEditableTags(footer as any, 'footer', true);
+        }
+        
+        return footer;
+      }
+      
+      return null;
+    } catch (error) {
+      console.error('Error fetching footer data via proxy:', error);
+      return null;
+    }
+  }
+
+  // Fallback to direct SDK call in production
   const result = await blogStack
     .contentType("footer")
     .entry()
