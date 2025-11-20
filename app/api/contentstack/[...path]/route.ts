@@ -40,11 +40,9 @@ export async function GET(
         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization, api_key, access_token',
         // Add caching headers for better performance
-        'Cache-Control': process.env.NODE_ENV === 'production' 
-          ? 'public, s-maxage=300, stale-while-revalidate=600' // 5 min cache, 10 min stale
-          : 'no-cache', // No cache in development
-        'CDN-Cache-Control': 'public, s-maxage=300',
-        'Vercel-CDN-Cache-Control': 'public, s-maxage=300',
+        'Cache-Control': 'no-cache',
+        //'CDN-Cache-Control': 'public, s-maxage=300',
+        //'Vercel-CDN-Cache-Control': 'public, s-maxage=300',
       },
     });
   } catch (error) {
