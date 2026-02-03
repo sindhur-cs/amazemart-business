@@ -9,7 +9,7 @@ export async function GET(
     const { searchParams } = new URL(request.url);
     
     // Construct the Contentstack API URL
-    const baseUrl = 'https://dev9-cdn.csnonprod.com/v3';
+    const baseUrl = process.env.NEXT_PUBLIC_CONTENTSTACK_BASE_URL || 'https://dev9-cdn.csnonprod.com/v3';
     const pathString = path.join('/');
     const queryString = searchParams.toString();
     const apiUrl = `${baseUrl}/${pathString}?${queryString}`;
@@ -23,6 +23,7 @@ export async function GET(
         'Content-Type': 'application/json',
         'api_key': process.env.NEXT_PUBLIC_CONTENTSTACK_API_KEY || '',
         'access_token': process.env.NEXT_PUBLIC_CONTENTSTACK_DELIVERY_TOKEN || '',
+        'branch': process.env.NEXT_PUBLIC_CONTENTSTACK_BRANCH as string
       },
     });
     

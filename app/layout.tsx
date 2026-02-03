@@ -32,6 +32,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <title>Amazemart Business</title>
+      </head>
       <body className="antialiased">
         <HeaderProvider>
           <LayoutContent>

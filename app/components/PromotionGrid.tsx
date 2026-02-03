@@ -20,22 +20,16 @@ export default function PromotionGrid({ promotionData, title }: PromotionGridPro
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">
-          {title || "Spotlight Deals"}
-        </h2>
-      </div>
-
-      <div className="flex flex-wrap gap-12 items-center justify-center">
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="flex gap-6 items-stretch justify-center flex-wrap lg:flex-nowrap">
         {promotionData.map((promotion) => (
           <PromotionCard key={promotion.promotion_card._metadata.uid} promotion={promotion} />
         ))}
       </div>
 
       {promotionData.length >= 6 && (
-        <div className="text-center mt-12">
-          <button className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-8 rounded-lg transition-colors duration-200">
+        <div className="text-center mt-10">
+          <button className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-8 rounded-xl transition-colors duration-200 shadow-md hover:shadow-lg">
             View More Deals
           </button>
         </div>
