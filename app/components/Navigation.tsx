@@ -1,6 +1,7 @@
 "use client";
 
 import { PageData as PageType, NavigationItem } from "@/lib/types";
+import { fixImageUrl } from "../../lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -25,7 +26,7 @@ export default function Navigation({ page }: NavigationProps) {
     })
     .map((item: NavigationItem) => ({
       title: item.navigation.title,
-      href: item.navigation.url,
+      href: `/products?category=${encodeURIComponent(item.navigation.title)}`,
       image: item.navigation.image,
       key: item.navigation._metadata.uid,
       order: item.navigation.order
@@ -40,7 +41,7 @@ export default function Navigation({ page }: NavigationProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-start justify-between">
           {navigationItems.map((item) => {
-            const isActive = pathname === item.href || (item.href === '/' && pathname === '/');
+            const isActive = pathname === '/products' && item.href.includes(encodeURIComponent(item.title));
             
             return (
               <Link
@@ -51,11 +52,11 @@ export default function Navigation({ page }: NavigationProps) {
                 <div className="w-20 h-20 bg-gray-100 rounded-2xl p-2 flex items-center justify-center mb-2 group-hover:shadow-md transition-shadow duration-200">
                   {item.image?.url ? (
                     <Image
-                      src={`${item.image.url}?environment=${process.env.NEXT_PUBLIC_CONTENTSTACK_ENVIRONMENT}`}
+                      src={fixImageUrl(`${item.image.url}?environment=${process.env.NEXT_PUBLIC_CONTENTSTACK_ENVIRONMENT}`)}
                       alt={item.title}
                       width={64}
                       height={64}
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-contain rounded-xl"
                     />
                   ) : (
                     <div className="w-full h-full bg-purple-500 rounded-xl flex items-center justify-center">
