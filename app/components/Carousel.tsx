@@ -52,7 +52,7 @@ export default function Carousel({ page }: CarouselProps) {
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-4 bg-gray-50">
       <div className="max-w-7xl mx-auto">
-        <div className="relative w-full h-64 sm:h-80 md:h-96 rounded-2xl overflow-hidden shadow-lg">
+        <div className="relative w-full aspect-[4/1] rounded-2xl overflow-hidden shadow-lg">
           <div className="relative w-full h-full">
             {carouselImages.map((image, index) => (
               <div
@@ -65,8 +65,8 @@ export default function Carousel({ page }: CarouselProps) {
                   src={image.src}
                   alt={image.alt}
                   fill
-                  sizes="100vw"
-                  className="object-cover"
+                  sizes="(max-width: 1280px) 100vw, 1280px"
+                  className="object-cover object-left"
                   priority={index === 0}
                 />
               </div>

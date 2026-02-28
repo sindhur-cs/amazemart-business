@@ -16,7 +16,7 @@ export default function Home() {
           <div className="text-center">
             <div className="relative mx-auto mb-4 w-16 h-16">
               <Image
-                src={header?.contentstack_logo?.url ? `${header.contentstack_logo.url}?environment=${process.env.NEXT_PUBLIC_CONTENTSTACK_ENVIRONMENT}` : "/logo_gif.webp"}
+                src={header?.contentstack_logo?.url ? `${header.contentstack_logo.url}?environment=${process.env.NEXT_PUBLIC_CONTENTSTACK_ENVIRONMENT}` : "/Ridge and Rover Icon.png"}
                 alt="Loading..."
                 width={64}
                 height={64}
